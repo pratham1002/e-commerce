@@ -129,7 +129,7 @@ def VendorHome(request):
 def CustomerHome(request):
     current_user=request.user
     customer=Customer.objects.get(username=current_user.username)
-    items=SoldItem.objects.all().order_by('-sold_quantity')
+    items=SoldItem.objects.all().order_by('-sold_quantity').filter(is_still_sold=True)
 
     if customer is None:
         return render(request, 'Hackerman.html')
